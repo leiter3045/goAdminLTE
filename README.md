@@ -87,3 +87,11 @@ $ bee go
 默认得用户名密码是
 admin 123456
 
+# 系统截图
+
+![这里写图片描述](http://img.blog.csdn.net/20171219211607394?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh0emJqMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![这里写图片描述](http://img.blog.csdn.net/20171219211617294?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh0emJqMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![这里写图片描述](http://img.blog.csdn.net/20171219211631456?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh0emJqMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![这里写图片描述](http://img.blog.csdn.net/20171219222006504?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh0emJqMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![这里写图片描述](http://img.blog.csdn.net/20171219222019726?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh0emJqMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)
+![这里写图片描述](http://img.blog.csdn.net/20171219222029838?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvbGh0emJqMTI=/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast)

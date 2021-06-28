@@ -12,6 +12,20 @@
 ```
 ## 分页
 作者根据PHP，thinkPHP3.2分页类，采用go语言重写，方法调用与使用都跟thinkPHP3.2分页是一样的
+```
+分页的使用实例
+import (
+	"quickstart/common/org"
+)
+model := org.Page{Request: c.Ctx.Request}
+model.NewPage().SetParams(totalRow, c.pageRow)
+model.SetConfig("prev", "上一页")
+model.SetConfig("next", "下一页")
+model.SetConfig("theme", " %HEADER%<li class='disabled'><a>%NOW_PAGE%/%TOTAL_PAGE% 页</a></li>%UP_PAGE%%FIRST%%LINK_PAGE%%DOWN_PAGE%")
+str := model.Show()
+c.Data["page_count"] = totalRow
+c.Data["pages"] = str
+```
 ## 众多的可用函数
 作者封装了大量的数据处理函数，很多PHP里面字符串处理函数，采用go语言重写，并且集成过来
 ## 获取安装

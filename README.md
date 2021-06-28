@@ -2,11 +2,9 @@
 
 基于beego, jquery ,bootstrap, AdminLTE-2.4.13的一个后台管理系统
 
-VERSION = "0.1.1"
-
 ## 获取安装
 
-执行以下命令，就能够在你的`GOPATH/src` 目录下发现beego admin
+执行以下命令，就能够在你的`GOPATH/src` 目录下发现beego
 ```bash
 $ go get github.com/beego
 ```
@@ -23,15 +21,7 @@ $ go get github.com/beego/beego/v2/server/web/session/redis
 ```go
 import (
 	"github.com/astaxie/beego"  //beego 包
-	"github.com/beego/admin"  //admin 包
 )
-
-```
-引入代码，再`init`函数中使用它
-```go
-func init() {
-	beego.Router("/", &admin.IndexController{})
-}
 ```
 ### 配置文件
 
@@ -70,9 +60,13 @@ rPort = 6379
 ```
 以上配置信息都需要加入到conf/app.conf文件中。
 
+### 数据库文档
+数据库暂时只有mysql链接
+
+
 ### 编译项目
 
-全部做好了以后。就可以编译了,进入hello目录
+全部做好了以后。就可以启动
 ```
 $ bee go
 ```

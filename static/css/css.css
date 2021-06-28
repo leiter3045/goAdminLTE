@@ -1,0 +1,8 @@
+.col-sm-7.ui-pages{float: initial;width: 100%}
+.col-sm-7.ui-pages .pagination{float: left;margin-left: 10px;}
+.green{color: green !important;}
+.red{color: red !important;}
+.form{padding: 20px;}
+.table tr th,.table tr td{text-align: center}
+.controller-button{display: inline-block}
+

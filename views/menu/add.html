@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    {{template "public/_meta.html" .}}
+</head>
+<body>
+<div class="form">
+    <form class="form-horizontal J_ajax_form" method="POST" action="">
+        <div class="form-group">
+            <label for="c-username" class="control-label col-xs-12 col-sm-2">菜单名称：</label>
+            <div class="col-xs-12 col-sm-4">
+                <input require="名称不得为空" class="form-control" name="name" value="{{if $.data.Name}}{{$.data.Name}}{{end}}" type="text">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="c-nickname" class="control-label col-xs-12 col-sm-2">父级菜单：</label>
+            <div class="col-xs-12 col-sm-4">
+                <select name="pid" class="form-control">
+                    <option value="0">顶级菜单</option>
+                    {{range $index, $elem := .menualls}}
+                    <option value={{$elem.Id}} {{if $.data.Pid}}{{if eq $.data.Pid $elem.Id}}selected{{end}}{{end}}>{{$elem.Html}}{{$elem.Name}}</option>
+                    {{end}}
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="c-nickname" class="control-label col-xs-12 col-sm-2">菜单URL</label>
+            <div class="col-xs-12 col-sm-4">
+                <input type="text" name="url" value="{{if $.data.Icon}}{{$.data.Icon}}{{end}}" placeholder="请输入菜单URL" class="form-control">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="c-nickname" class="control-label col-xs-12 col-sm-2">前缀图标：</label>
+            <div class="col-xs-12 col-sm-4">
+                <input name="icon" value="{{if $.data.Icon}}{{$.data.Icon}}{{end}}" class="form-control" />
+                <p class="inp_tip">选择系统自带的ICON图标.</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="c-nickname" class="control-label col-xs-12 col-sm-2">菜单排序：</label>
+            <div class="col-xs-12 col-sm-4">
+                <input maxlength="5" data-filter="int" name="sort" value="{{if $.data.Sort}}{{$.data.Sort}}{{else}}50{{end}}" class="form-control" />
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-12 col-sm-2">是否开启：</label>
+            <div class="col-xs-12 col-sm-4">
+                <label class="radio-inline">
+                    <input type="radio" name="state" {{if $.data.State}}checked{{end}} value="1">是
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="state" {{if $.data.State}}{{else}}checked{{end}} value="0">否
+                </label>
+            </div>
+        </div>
+        {{if $.data.Id}}
+        <input type="hidden" name="id" value="{{$.data.Id}}" />
+        {{end}}
+        <div class="form-group layer-footer">
+            <label class="control-label col-xs-12 col-sm-2"></label>
+            <div class="col-xs-12 col-sm-8">
+                <button type="submit" class="btn btn-success btn-embossed">提交</button>
+            </div>
+        </div>
+    </form>
+</div>
+{{template "public/_js.html" .}}
+</body>
+</html>

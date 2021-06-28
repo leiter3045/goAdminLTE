@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    {{template "public/_meta.html" .}}
+    <link rel="stylesheet" href="/static/css/login.css">
+</head>
+<body>
+<div class="container">
+    <div class="login-wrapper">
+        <div class="login-screen">
+            <div class="well">
+                <div class="login-form">
+                    <img id="profile-img" class="profile-img-card" src="/static/img/user2-160x160.jpg" />
+                    <p id="profile-name" class="profile-name-card"></p>
+                    <form action="" method="post" id="login-form" class="J_ajax_form">
+                        <div id="errtips" class="hide"></div>
+                        <p style="text-align: center;font-size: 20px;">管理员登录</p>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i style="width: 14px;" class="fa fa-user-circle" aria-hidden="true"></i></div>
+                            <input type="text" class="form-control" placeholder="管理员账号" require="管理员账号不能为空" name="Username" maxlength="20" />
+                        </div>
+                        <div class="input-group">
+                            <div class="input-group-addon"><i style="width: 14px;"  class="fa fa-unlock-alt" aria-hidden="true"></i></div>
+                            <input type="password" class="form-control" name="Userpass" placeholder="管理员密码" require="管理员密码不能为空" maxlength="20" />
+                        </div>
+                        <!--<div class="input-group">
+                            <div class="input-group-addon"><i class="fa fa-codepen" aria-hidden="true"></i></div>
+                            <input type="text" name="captcha" class="form-control" name="code" placeholder="动态验证码" require="动态验证码不能为空" maxlength="6" />
+                            <span class="input-group-addon" style="padding:0;border:none;cursor:pointer;">
+                                <img id="codeImg" style="height: 34px;" title="点击刷新" name="codeImg" src="{:U('Passport/verify')}" onclick="this.src='{:U('Passport/verify')}?r='+Math.random()"/>
+                            </span>
+                        </div>-->
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-success btn-lg btn-block">登 录</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <!-- FastAdmin是开源程序，建议在您的网站底部保留一个FastAdmin的链接 -->
+            <p class="copyright"><a href="https://www.fastadmin.net">Powered By FastAdmin</a></p>
+        </div>
+    </div>
+</div>
+{{template "public/_js.html" .}}
+</body>
+</html>

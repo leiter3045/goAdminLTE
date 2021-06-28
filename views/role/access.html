@@ -1,0 +1,82 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <meta charset="utf-8">
+    {{template "public/_meta.html" .}}
+</head>
+<style type="text/css">
+    .name{
+        font-size: 18px;
+        line-height: 40px;
+    }
+</style>
+<body>
+<div class="form">
+    <form action="" method="post" class="J_ajax_form">
+        <div class="name">
+            <span>角色名称：</span>
+            <strong>{{if $.data.Name}}{{$.data.Name}}{{end}}</strong>
+        </div>
+        <div class="tbale">
+            <div class="name">角色权限：</div>
+            {{range $index, $menu := .all_munes}}
+            <div class="menu_1">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" name="rule" data-type="1" {{if $menu.Status}}checked{{end}} value="{{$menu.Id}},{{$menu.Url}}">{{$menu.Name}}
+                    </label>
+                </div>
+                {{if $menu.Child}}
+                {{range $index, $child := $menu.Child}}
+                    <div class="menu_2" style="margin-left: 20px">
+                        <div class="checkbox">
+                            <label>
+                                <input type="checkbox" name="rule" data-type="2" {{if $child.Status}}checked{{end}} value="{{$child.Id}},{{$child.Url}}">{{$child.Name}}
+                            </label>
+                        </div>
+                        {{if $child.Child}}
+                        <div class="menu_3" style="margin-left: 40px">
+                            <div class="checkbox">
+                                {{range $index, $child2 := $child.Child}}
+                                    <label class="checkbox-inline">
+                                        <input type="checkbox" name="rule" data-type="3" {{if $child2.Status}}checked{{end}} value="{{$child2.Id}},{{$child2.Url}}">{{$child2.Name}}
+                                    </label>
+                                {{end}}
+                            </div>
+                        </div>
+                        {{end}}
+                    </div>
+                {{end}}
+                {{end}}
+            </div>
+            {{end}}
+            {{if $.data.Id}}
+            <input type="hidden" name="role_id" value="{{$.data.Id}}" />
+            {{end}}
+            <div class="form-group layer-footer">
+                <div class="col-xs-12 col-sm-8">
+                    <button type="submit" class="btn btn-success btn-embossed">提交</button>
+                    <button type="reset" class="btn radius ml10">重置</button>
+                </div>
+                <div style="clear: both;"></div>
+            </div>
+        </div>
+    </form>
+</div>
+{{template "public/_js.html" .}}
+<script>
+    $(function(){
+        $('.tbale').on("click", "input[type='checkbox']",function(){
+            var _this = this;
+            var _type = $(_this).data('type');
+            var child = $(_this).closest(".menu_" + _type).find('.menu_' + parseInt(_type+1)).find("input[type='checkbox']");
+            if($(_this).prop("checked")){
+                child.prop('checked', true);
+            }else{
+                child.prop('checked', false);
+            }
+        })
+    })
+</script>
+</body>
+</html>

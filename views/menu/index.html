@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    {{template "public/_meta.html" .}}
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        {{template "public/_header.html" .}}
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        {{template "public/_menu.html" .}}
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="ui-button">
+                                <a class="btn btn-primary radius J_dialog" _title="添加菜单" _url={{urlfor "MenuController.Add"}} _width="750" _height="550" href="javascript:;">
+                                    <i class="fa fa-plus"></i>
+                                    添加菜单
+                                </a>
+                                <a class="btn btn-success radius J_replace" href="javascript:;" title="刷新" >
+                                    <i class="fa fa-refresh"></i>
+                                    刷新
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th width="25"><input type="checkbox" class="J_check_all" value=""></th>
+                                    <th>菜单名称</th>
+                                    <th>操作URL</th>
+                                    <th>图标</th>
+                                    <th>状态</th>
+                                    <th>排序</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{range $index, $elem := .lists}}
+                                <tr id="node-2" class="text-c">
+                                    <td class="center">
+                                        <input type="checkbox" class="J_check_item" name="ids[]" value={{$elem.Id}} />
+                                    </td>
+                                    <td class="text-l green tree">
+                                        {{$elem.Html}}{{$elem.Name}}
+                                    </td>
+                                    <td class="text-l">
+                                        {{$elem.Url}}
+                                    </td>
+                                    <td class="text-l">
+                                        {{$elem.Icon}}
+                                    </td>
+                                    <td>
+                                        <a class="J_ajax_change" title="">
+                                            <i class="fa {{if $elem.State}}fa-check green{{else}}fa-times red{{end}}" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                    <td>
+                                        {{$elem.Sort}}
+                                    </td>
+                                    <td class="f-14 td-manage">
+                                        <a class="ml-5 J_dialog"  _title="编辑菜单" _width="750" _height="550" _url={{urlfor "MenuController.Edit" "id" $elem.Id}} href="javascript:;">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 编辑
+                                        </a>
+                                        &nbsp;&nbsp;
+                                        <a class="ml-5 J_ajax_confirm" href="javascript:;" data-tip="确定要删除吗？" data-url="{{urlfor "MenuController.Del" "id" $elem.Id}}" title="删除">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{end}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        {{template "public/_footer.html" .}}
+    </footer>
+    <div class="control-sidebar-bg"></div>
+</div>
+{{template "public/_js.html" .}}
+</body>
+</html>

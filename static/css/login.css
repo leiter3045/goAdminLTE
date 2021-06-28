@@ -1,0 +1,12 @@
+body {color:#999;background-size:cover;}
+a {color:#fff;}
+.login-panel {margin-top:150px;}
+.login-screen {max-width:400px;padding:0;margin:100px auto 0 auto;}
+.login-screen .well {border-radius:3px;-webkit-box-shadow:0 0 10px rgba(0,0,0,0.1);box-shadow:0 0 10px rgba(0,0,0,0.1);background:rgba(255,255,255,0.2);}
+.login-screen .copyright {text-align:center;}
+@media(max-width:767px) {.login-screen {padding:0 20px;}
+}
+.profile-img-card {width:100px;height:100px;margin:10px auto;display:block;-moz-border-radius:50%;-webkit-border-radius:50%;border-radius:50%;}
+.profile-name-card {text-align:center;}
+#login-form {margin-top:20px;}
+#login-form .input-group {margin-bottom:15px;}

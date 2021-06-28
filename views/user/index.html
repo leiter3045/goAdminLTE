@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    {{template "public/_meta.html" .}}
+</head>
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+    <header class="main-header">
+        {{template "public/_header.html" .}}
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        {{template "public/_menu.html" .}}
+    </aside>
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Main content -->
+        <section class="content">
+            <div class="row">
+                <div class="col-xs-12">
+                    <div class="box">
+                        <div class="box-header">
+                            <div class="ui-button">
+                                <a class="btn btn-primary radius J_dialog" _title="添加员工" _url={{urlfor "UserController.Add"}} _width="700" _height="450" href="javascript:;">
+                                <i class="fa fa-plus"></i>
+                                添加员工
+                                </a>
+                                <a class="btn btn-success radius J_replace" href="javascript:;" title="刷新" >
+                                    <i class="fa fa-refresh"></i>
+                                    刷新
+                                </a>
+                            </div>
+                        </div>
+                        <!-- /.box-header -->
+                        <div class="box-body">
+                            <table id="example2" class="table table-bordered table-hover">
+                                <thead>
+                                <tr>
+                                    <th>员工名称</th>
+                                    <th>所属角色</th>
+                                    <th>最后登录IP</th>
+                                    <th>最后登录时间</th>
+                                    <th>登录次数</th>
+                                    <th>状态</th>
+                                    <th>操作</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {{if $.lists}}
+                                {{range $index, $elem := .lists}}
+                                <tr id="node-2" class="text-c">
+                                    <td class="text-l green tree">
+                                        {{$elem.Username}}
+                                    </td>
+                                    <td class="text-l green tree">
+                                        {{$elem.Roles.Name}}
+                                    </td>
+                                    <td class="text-l">
+                                        {{$elem.LastLoginIp}}
+                                    </td>
+                                    <td class="text-l">
+                                        {{$elem.LastLoginTime}}
+                                    </td>
+                                    <td class="text-l">
+                                        {{$elem.LoginTimes}}
+                                    </td>
+                                    <td>
+                                        <a class="J_ajax_change" title="">
+                                            <i class="fa {{if $elem.State}}fa-check green{{else}}fa-times red{{end}}" aria-hidden="true"></i>
+                                        </a>
+                                    </td>
+                                    <td class="f-14 td-manage">
+                                        <a class="ml-5 J_dialog"  _title="角色分配" _width="550" _height="300" _url={{urlfor "UserController.Access" "id" $elem.Id}} href="javascript:;">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 角色分配
+                                        </a>
+                                        &nbsp;&nbsp;
+                                        <a class="ml-5 J_dialog"  _title="编辑员工" _width="700" _height="450" _url={{urlfor "UserController.Edit" "id" $elem.Id}} href="javascript:;">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i> 编辑
+                                        </a>
+                                        &nbsp;&nbsp;
+                                        <a class="ml-5 J_ajax_confirm" href="javascript:;" data-tip="确定要删除吗？" data-url="{{urlfor "UserController.Del" "id" $elem.Id}}" title="删除">
+                                            <i class="fa fa-trash" aria-hidden="true"></i> 删除
+                                        </a>
+                                    </td>
+                                </tr>
+                                {{end}}
+                                {{else}}
+                                <tr><td colspan="100">^_^&nbsp;&nbsp;暂时没有添加用户~</td></tr>
+                                {{end}}
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="row">
+                            {{if $.pages}}
+                            <div class="col-sm-7 ui-pages">
+                                <div class="dataTables_paginate paging_simple_numbers" id="example2_paginate">
+                                    {{str2html .pages}}
+                                </div>
+                            </div>
+                            {{end}}
+                        </div>
+                        <!-- /.box-body -->
+                    </div>
+                    <!-- /.box -->
+                </div>
+                <!-- /.col -->
+            </div>
+            <!-- /.row -->
+        </section>
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+    <footer class="main-footer">
+        {{template "public/_footer.html" .}}
+    </footer>
+    <div class="control-sidebar-bg"></div>
+</div>
+{{template "public/_js.html" .}}
+</body>
+</html>

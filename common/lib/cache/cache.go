@@ -1,13 +1,14 @@
 package cache
 
 import (
-	"errors"
 	"github.com/astaxie/beego"
+	"errors"
+	"time"
 )
 
 type Cache interface {
-	SetStr(key, value string, time int64) error
-	GetStr(key string) string
+	SetStr(key string, value interface{}, time time.Duration) error
+	GetStr(key string) (map[string]interface{}, error)
 	DelKey(key string) error
 }
 
@@ -25,11 +26,12 @@ func Register(name string, adapter Instance) {
 	adapters[name] = adapter
 }
 
-func GetInstance(adapterName string) (adapter Cache, err error) {
+func GetInstance( ) (adapter Cache, err error) {
+	var adapterName string
+	adapterName = beego.AppConfig.String("cachename")
 	if adapterName == "" {
-		adapterName = beego.AppConfig.String("cachename")
+		return adapter, errors.New("cache error: Can't find configuration")
 	}
-
 	if instanceFunc, ok := adapters[adapterName]; ok == true {
 		return instanceFunc(), nil
 	}

@@ -30,32 +30,23 @@ func GetUuid() string {
 	return uuid
 }
 
-func Cache(key string, value interface{}, time int64) (val interface{}, err error) {
-	instance, errs := cache.GetInstance("redis")
+func Cache(key string, value interface{}, time time.Duration) (val interface{}, err error) {
+	instance, errs := cache.GetInstance()
 	if errs != nil {
 		return val, errs
 	}
-	json, _ := JsonEncode(value)
-	instance.SetStr(key, json, 500)
-	return val, err
-	//if value == "" || time == -1 {
-	//	if time == -1 {
-	//		err = instance.DelKey(key)
-	//		return val, err
-	//	} else {
-	//		list := instance.GetStr(key)
-	//		if list != "" {
-	//			var arr interface{}
-	//			arr, err = JsonDecode(list)
-	//			return arr, err
-	//		}
-	//		return val, errors.New("未找到数据")
-	//	}
-	//} else {
-	//	json, _ := JsonEncode(value)
-	//	err = instance.SetStr(key, json, time)
-	//	return val, err
-	//}
+	if value == "" || time == -1 {
+		if time == -1 {
+			instance.DelKey(key)
+			return
+		} else {
+			val, _ = instance.GetStr(key)
+			return val, nil
+		}
+	} else {
+		instance.SetStr(key, value, time)
+		return
+	}
 }
 
 func Strtotime(str string) (int64) {

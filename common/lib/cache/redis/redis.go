@@ -1,12 +1,14 @@
 package redis
 
 import (
+	"encoding/json"
 	"fmt"
 	"github.com/astaxie/beego"
 	cacheDb "github.com/astaxie/beego/cache"
 	"quickstart/common/lib/cache"
 	_ "github.com/astaxie/beego/cache/redis"
 	_ "github.com/gomodule/redigo/redis"
+	"time"
 )
 
 var redisCache cacheDb.Cache
@@ -32,19 +34,21 @@ func NewRedisCache() cache.Cache {
 	return &Cache{}
 }
 
-func (c *Cache) SetStr(key, value string, time int64) (err error) {
-	//err = redisCache.Put(key, value, time)
-	//if err != nil {
-	//	beego.Error("set key:", key, ",value:", value, err)
-	//}
-	fmt.Print(time)
+func (c *Cache) SetStr(key string, value interface{}, time time.Duration) (err error) {
+	jsons, _ := json.Marshal(value)
+	err = redisCache.Put(key, string(jsons), time)
+	if err != nil {
+		beego.Error("set key:", key, ",value:", value, err)
+	}
 	return
 }
 
-func (c *Cache) GetStr(key string) (value string) {
+func (c *Cache) GetStr(key string) (vs map[string]interface{}, err error) {
 	v := redisCache.Get(key)
-	value = string(v.([]byte)) //这里的转换很重要，Get返回的是interface
-	return
+	value := string(v.([]byte)) //这里的转换很重要，Get返回的是interface
+	var dat map[string]interface{}
+	err = json.Unmarshal([]byte(value), &dat)
+	return dat, err
 }
 
 func (c *Cache) DelKey(key string) (err error) {

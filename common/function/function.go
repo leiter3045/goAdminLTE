@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"log"
 	"quickstart/common/constant"
+	"quickstart/common/lib/cache"
+	_ "quickstart/common/lib/cache/redis"
 	"crypto/md5"
 	"crypto/rand"
 	"encoding/hex"
@@ -26,6 +28,34 @@ func GetUuid() string {
 	uuid := fmt.Sprintf("%x-%x-%x-%x-%x",
 		b[0:4], b[4:6], b[6:8], b[8:10], b[10:])
 	return uuid
+}
+
+func Cache(key string, value interface{}, time int64) (val interface{}, err error) {
+	instance, errs := cache.GetInstance("redis")
+	if errs != nil {
+		return val, errs
+	}
+	json, _ := JsonEncode(value)
+	instance.SetStr(key, json, 500)
+	return val, err
+	//if value == "" || time == -1 {
+	//	if time == -1 {
+	//		err = instance.DelKey(key)
+	//		return val, err
+	//	} else {
+	//		list := instance.GetStr(key)
+	//		if list != "" {
+	//			var arr interface{}
+	//			arr, err = JsonDecode(list)
+	//			return arr, err
+	//		}
+	//		return val, errors.New("未找到数据")
+	//	}
+	//} else {
+	//	json, _ := JsonEncode(value)
+	//	err = instance.SetStr(key, json, time)
+	//	return val, err
+	//}
 }
 
 func Strtotime(str string) (int64) {

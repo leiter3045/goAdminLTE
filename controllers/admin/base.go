@@ -4,6 +4,7 @@ import (
 	"errors"
 	"github.com/astaxie/beego"
 	"quickstart/common/model"
+	"quickstart/common/service"
 	"quickstart/common/org"
 	"quickstart/common/constant"
 	"quickstart/common/function"
@@ -39,6 +40,7 @@ func (c *BaseController) Prepare() {
 			c._dataInit()
 		}
 	}
+	c._getConfig(false)
 }
 
 func (c *BaseController) list(totalRow int)  {
@@ -242,4 +244,24 @@ func (c *BaseController) filterMenu(menus []org.Tree, url string) ([]org.Tree) {
 		arr = append(arr, v)
 	}
 	return arr;
+}
+
+/**
+ * 获取系统配置信息
+ */
+/**
+ * 根据权限过滤菜单
+ * @param unknown $menus
+ * @return multitype:unknown
+ */
+func (c *BaseController) _getConfig(refresh bool) {
+	// 先格式化TREE
+	service := service.Config{}
+	list := service.GetInfo(refresh)
+	arr := make(map[string]interface{}, 0)
+	for _, v := range list.([]interface{}) {
+		var inter = v.(map[string]interface{})
+		arr[inter["Name"].(string)] = inter["Value"]
+	}
+	c.Data["sysconfig"] = arr
 }

@@ -40,8 +40,8 @@ func Cache(key string, value interface{}, time time.Duration) (val interface{}, 
 			instance.DelKey(key)
 			return
 		} else {
-			val, _ = instance.GetStr(key)
-			return val, nil
+			val, err = instance.GetStr(key)
+			return val, err
 		}
 	} else {
 		instance.SetStr(key, value, time)

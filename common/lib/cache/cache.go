@@ -8,7 +8,7 @@ import (
 
 type Cache interface {
 	SetStr(key string, value interface{}, time time.Duration) error
-	GetStr(key string) (map[string]interface{}, error)
+	GetStr(key string) (string, error)
 	DelKey(key string) error
 }
 

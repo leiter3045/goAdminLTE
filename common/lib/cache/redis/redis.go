@@ -2,6 +2,7 @@ package redis
 
 import (
 	"encoding/json"
+	"errors"
 	"fmt"
 	"github.com/astaxie/beego"
 	cacheDb "github.com/astaxie/beego/cache"
@@ -43,12 +44,13 @@ func (c *Cache) SetStr(key string, value interface{}, time time.Duration) (err e
 	return
 }
 
-func (c *Cache) GetStr(key string) (vs map[string]interface{}, err error) {
+func (c *Cache) GetStr(key string) (data string, err error) {
 	v := redisCache.Get(key)
+	if v == nil {
+		return data, errors.New("cache no")
+	}
 	value := string(v.([]byte)) //这里的转换很重要，Get返回的是interface
-	var dat map[string]interface{}
-	err = json.Unmarshal([]byte(value), &dat)
-	return dat, err
+	return value, err
 }
 
 func (c *Cache) DelKey(key string) (err error) {

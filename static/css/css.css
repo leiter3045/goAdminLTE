@@ -5,4 +5,4 @@
 .form{padding: 20px;}
 .table tr th,.table tr td{text-align: center}
 .controller-button{display: inline-block}
-
+.ui-config{text-align: left;padding: 20px;width: 1200px;display: block;}

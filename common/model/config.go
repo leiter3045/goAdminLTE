@@ -1,7 +1,6 @@
 package model
 
 import (
-	"fmt"
 	"github.com/astaxie/beego/orm"
 	"quickstart/common/validate"
 	"quickstart/common/lib/traits"
@@ -46,30 +45,31 @@ func (c Config) GetInfoByAll() (m []*Config, err error) {
 	o := orm.NewOrm()
 	qs := o.QueryTable(c)
 	qs.All(&m);
-	fmt.Print(m)
 	return m, err
 }
 
 /**
  * 编辑菜单
  */
-func (c *Config) Edit() (bool) {
+func (c *Config) Edit(name, value string) (bool) {
 	valid := validate.Config{
-		Name:  c.Name,
-		Value: c.Value,
+		Name:  name,
+		Value: value,
 	}
 	if state := valid.Valid(); state == false {
 		c.SetError(valid.GetError())
 		return false
 	}
 	o := orm.NewOrm()
-	config := Config{Name: c.Name}
-	if o.Read(&config) == nil {
-		config.Value = c.Value
-		if _, err := o.Update(&config, "Value"); err != nil {
-			c.SetError("修改数据失败")
-			return false
-		}
+	config := Config{Name: name}
+	if o.Read(&config, "Name") != nil {
+		c.SetError("未获取的数据")
+		return false
+	}
+	config.Value = value
+	if _, err := o.Update(&config, "Value"); err != nil {
+		c.SetError("修改数据失败")
+		return false
 	}
 	return true
 }

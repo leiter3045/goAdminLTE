@@ -1,6 +1,7 @@
 package service
 
 import (
+	"encoding/json"
 	"quickstart/common/model"
 	"quickstart/common/lib/traits"
 	"quickstart/common/function"
@@ -15,14 +16,16 @@ type Config struct {
 }
 
 func (c Config) GetInfo(refresh bool) interface{} {
-	list, err := function.Cache("sysconfig", "", 0)
+	str, err := function.Cache("sysconfig", "", 0)
 	if err != nil || refresh == true {
 		model := model.Config{}
-		arr, errs := model.GetInfoByAll()
+		dataSlice, errs := model.GetInfoByAll()
 		if errs == nil {
-			function.Cache("sysconfig", arr, 1000*time.Second)
+			function.Cache("sysconfig", dataSlice, 1000*time.Second)
 		}
-		list = arr
+		str, _ = function.Cache("sysconfig", "", 0)
 	}
-	return list
+	var dat []interface{}
+	err = json.Unmarshal([]byte(str.(string)), &dat)
+	return dat
 }

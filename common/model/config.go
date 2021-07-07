@@ -23,7 +23,7 @@ func init() {
 }
 
 /**
- * 通过菜单ID获取详情
+ * 通过ID获取详情
  * @param int id
  * @return array
  */
@@ -37,8 +37,7 @@ func (c Config) GetInfoById(Id int) (v *Config, err error) {
 }
 
 /**
- * 通过菜单ID获取详情
- * @param int id
+ * 获取所有数据
  * @return array
  */
 func (c Config) GetInfoByAll() (m []*Config, err error) {
@@ -49,7 +48,7 @@ func (c Config) GetInfoByAll() (m []*Config, err error) {
 }
 
 /**
- * 编辑菜单
+ * 编辑
  */
 func (c *Config) Edit(name, value string) (bool) {
 	valid := validate.Config{

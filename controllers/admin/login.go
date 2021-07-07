@@ -6,6 +6,7 @@ import (
 	"quickstart/common/constant"
 )
 
+// 员工登录
 type LoginController struct {
 	BaseController
 }
@@ -14,6 +15,9 @@ func (c *LoginController) Index() {
 	c.TplName = "login/index.html"
 }
 
+/**
+ * 登录
+ */
 func (c *LoginController) DoLogin() {
 	username :=	c.GetString("Username")
 	userpass := c.GetString("Userpass")

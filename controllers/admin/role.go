@@ -7,11 +7,15 @@ import (
 	"strings"
 )
 
+// 角色管理
 type RoleController struct {
 	BaseController
 	model.Role
 }
 
+/**
+ * 页面
+ */
 func (c *RoleController) Index() {
 	page , _  := c.GetInt("page", 0)
 	lists, count, _ := c.GetList(9, c.pageRow, (page - 1) * c.pageRow)
@@ -20,10 +24,16 @@ func (c *RoleController) Index() {
 	c.TplName = "role/index.html"
 }
 
+/**
+ * 添加页面
+ */
 func (c *RoleController) Add() {
 	c.TplName = "role/add.html"
 }
 
+/**
+ * 添加数据
+ */
 func (c *RoleController) AddPost() {
 	state , _ := c.GetInt("state", 0)
 	model := model.Role{
@@ -39,6 +49,9 @@ func (c *RoleController) AddPost() {
 	c.ajaxSuccess("新增成功！", "", "-1")
 }
 
+/**
+ * 编辑页面
+ */
 func (c *RoleController) Edit() {
 	id , err := c.GetInt("id", 0)
 	if err != nil {
@@ -49,6 +62,9 @@ func (c *RoleController) Edit() {
 	c.TplName = "role/add.html"
 }
 
+/**
+ * 编辑数据
+ */
 func (c *RoleController) EditPost() {
 	id , err := c.GetInt("id", 0)
 	if err != nil {
@@ -74,6 +90,9 @@ type RoleInterface struct {
 	Url   			string
 }
 
+/**
+ * 添加权限页面
+ */
 func (c *RoleController) Access()  {
 	id, _ := c.GetInt("id", 0)
 	info, _ := c.GetInfoById(id)
@@ -97,6 +116,9 @@ type EditorInput struct {
 	Rulegroup []string `form:"rule"`
 }
 
+/**
+ * 添加权限
+ */
 func (c *RoleController) AccessPost()  {
 	ei := EditorInput{}
 	if err := c.ParseForm(&ei); err != nil {
@@ -123,6 +145,9 @@ func (c *RoleController) AccessPost()  {
 	c.ajaxSuccess("添加角色权限成功", "", "-1")
 }
 
+/**
+ * 删除
+ */
 func (c *RoleController) Del()  {
 	id , err := c.GetInt("id", 0)
 	if err != nil {

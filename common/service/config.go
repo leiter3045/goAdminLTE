@@ -15,6 +15,11 @@ type Config struct {
 	Value    	string
 }
 
+/**
+ * 获取配置数据支持缓存
+ * @param bool refresh
+ * @return array
+ */
 func (c Config) GetInfo(refresh bool) interface{} {
 	str, err := function.Cache("sysconfig", "", 0)
 	if err != nil || refresh == true {

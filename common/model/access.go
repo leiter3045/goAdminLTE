@@ -24,9 +24,9 @@ func init() {
 }
 
 /**
- * 通过菜单ID获取菜单详情
- * @param int id
- * @return array
+ * 通过ID获取详情
+ * @param int roleId
+ * @return Access
  */
 func (c Access) GetInfoById(roleId int) (v *Access, err error) {
 	o := orm.NewOrm()
@@ -37,6 +37,12 @@ func (c Access) GetInfoById(roleId int) (v *Access, err error) {
 	return nil, err
 }
 
+/**
+ * 获取详情
+ * @param int roleId
+ * @param int menuId
+ * @return Access
+ */
 func (c Access) GetMenuIdsByRole(roleId int, menuId int) (v *Access, err error) {
 	o := orm.NewOrm()
 	v = &Access{RoleId: roleId, MenuId: menuId}

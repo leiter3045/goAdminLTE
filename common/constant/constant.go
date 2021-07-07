@@ -26,9 +26,9 @@ const (
 
 type Constant struct {}
 
-/**state
+/**
  * 管理员操作事件
- * @param string $event
+ * @param int eventId
  */
 func (c Constant) UserEvent(eventId int) (v map[int]string, eId string, err error) {
 	options := make(map[int]string)

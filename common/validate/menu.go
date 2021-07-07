@@ -10,6 +10,10 @@ type Menu struct {
 	Url   	string 	
 }
 
+/**
+ * 验证数据
+ * @return bool
+ */
 func (u *Menu) Valid() (bool) {
     if name := u.Name; len(name) == 0 {
 		u.SetError("name不得为空")

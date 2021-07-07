@@ -10,6 +10,10 @@ type Config struct {
 	Value   	string
 }
 
+/**
+ * 验证数据
+ * @return bool
+ */
 func (u *Config) Valid() (bool) {
 	if name := u.Name; len(name) == 0 {
 		u.SetError("配置名称不得为空")

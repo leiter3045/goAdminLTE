@@ -7,11 +7,15 @@ import (
 	"time"
 )
 
+// 员工管理
 type UserController struct {
 	BaseController
 	model.User
 }
 
+/**
+ * 页面
+ */
 func (c *UserController) Index() {
 	page , _  := c.GetInt("page", 0)
 	lists, conut, _ := c.GetList(9, c.pageRow, (page - 1) * c.pageRow, true)
@@ -20,10 +24,16 @@ func (c *UserController) Index() {
 	c.TplName = "user/index.html"
 }
 
+/**
+ * 添加页面
+ */
 func (c *UserController) Add() {
 	c.TplName = "user/add.html"
 }
 
+/**
+ * 添加数据
+ */
 func (c *UserController) AddPost() {
 	state , _ := c.GetInt("state", 0)
 	userpass := c.GetString("userpass")
@@ -49,6 +59,9 @@ func (c *UserController) AddPost() {
 	c.ajaxSuccess("新增成功！", arr, "-1")
 }
 
+/**
+ * 编辑
+ */
 func (c *UserController) Edit() {
 	id , err := c.GetInt("id", 0)
 	if err != nil {
@@ -59,6 +72,9 @@ func (c *UserController) Edit() {
 	c.TplName = "user/add.html"
 }
 
+/**
+ * 编辑数据
+ */
 func (c *UserController) EditPost() {
 	id , err := c.GetInt("id", 0)
 	if err != nil {
@@ -87,6 +103,9 @@ func (c *UserController) EditPost() {
 	c.ajaxSuccess("编辑数据成功！", arr, "-1")
 }
 
+/**
+ * 添加用户权限页面
+ */
 func (c *UserController) Access()  {
 	id, _ := c.GetInt("id", 0)
 	info, _ := c.GetInfoById(id, false)
@@ -97,6 +116,9 @@ func (c *UserController) Access()  {
 	c.TplName = "user/access.html"
 }
 
+/**
+ * 添加用户权限
+ */
 func (c *UserController) AccessPost()  {
 	userId, _ := c.GetInt("id", 0)
 	roleId, _ := c.GetInt("role_id", 0)
@@ -109,10 +131,16 @@ func (c *UserController) AccessPost()  {
 	c.ajaxSuccess("添加员工角色成功", "", "-1")
 }
 
+/**
+ * 修改密码页面
+ */
 func (c *UserController) AjaxPass() {
 	c.TplName = "user/useredit.html"
 }
 
+/**
+ * 删除员工
+ */
 func (c *UserController) Del()  {
 	id , err := c.GetInt("id", 0)
 	if err != nil {

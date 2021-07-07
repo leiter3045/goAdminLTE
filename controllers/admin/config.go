@@ -5,14 +5,21 @@ import (
 	"quickstart/common/constant"
 )
 
+// 系统配置
 type ConfigController struct {
 	BaseController
 }
 
+/**
+ * 页面
+ */
 func (c *ConfigController) Index() {
 	c.TplName = "config/index.html"
 }
 
+/**
+ * 编辑
+ */
 func (c *ConfigController) Edit() {
 	model := new (model.Config)
 	webname := c.GetString("webname")

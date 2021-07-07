@@ -11,6 +11,10 @@ type Userlog struct {
 	Ip			string
 }
 
+/**
+ * 验证数据
+ * @return bool
+ */
 func (u *Userlog) Valid() (bool) {
 	if eventId := u.EventId; eventId == 0 {
 		u.SetError("事件ID不得为空")

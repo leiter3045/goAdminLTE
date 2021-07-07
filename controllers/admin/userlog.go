@@ -6,6 +6,7 @@ import (
 	"quickstart/common/function"
 )
 
+// 员工操作日志
 type UserlogController struct {
 	BaseController
 	model.Userlog

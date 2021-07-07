@@ -15,10 +15,19 @@ import (
 	"time"
 )
 
+/**
+ * 时间戳转时间
+ * @param int64 int_time
+ * @return string
+ */
 func ConvertToTime(int_time int64) string {
 	return time.Unix(int_time, 0).Format("2006-01-02 15:04")
 }
 
+/**
+ * 获取唯一uid
+ * @return string
+ */
 func GetUuid() string {
 	b := make([]byte, 16)
 	_, err := rand.Read(b)
@@ -30,6 +39,13 @@ func GetUuid() string {
 	return uuid
 }
 
+/**
+ * 设置缓存通用函数，删除缓存,读取缓存
+ * @param string key
+ * @param interface{} value
+ * @param time.Duration 缓存时间
+ * @return interface{}，error
+ */
 func Cache(key string, value interface{}, time time.Duration) (val interface{}, err error) {
 	instance, errs := cache.GetInstance()
 	if errs != nil {
@@ -49,6 +65,11 @@ func Cache(key string, value interface{}, time time.Duration) (val interface{}, 
 	}
 }
 
+/**
+ * 时间转时间戳
+ * @param string str
+ * @return int64
+ */
 func Strtotime(str string) (int64) {
 	layout := "2006-01-02 15:04:05"
 	t, err := time.Parse(layout, str)
@@ -58,6 +79,12 @@ func Strtotime(str string) (int64) {
 	return t.Unix()
 }
 
+/**
+ * 字符串转数组
+ * @param string delimiter
+ * @param string text
+ * @return []string
+ */
 func Explode(delimiter, text string) []string {
 	if len(delimiter) > len(text) {
 		return strings.Split(delimiter, text)
@@ -66,10 +93,22 @@ func Explode(delimiter, text string) []string {
 	}
 }
 
+/**
+ * 数组转字符串
+ * @param string glue
+ * @param []string pieces
+ * @return string
+ */
 func Implode(glue string, pieces []string) string {
 	return strings.Join(pieces, glue)
 }
 
+/**
+ * 二维数组取值转一维数组
+ * @param map[string]map[string]interface{} input
+ * @param string columnKey
+ * @return []interface{}
+ */
 func ArrayColumn(input map[string]map[string]interface{}, columnKey string) []interface{} {
 	columns := make([]interface{}, 0, len(input))
 	for _, val := range input {
@@ -80,17 +119,33 @@ func ArrayColumn(input map[string]map[string]interface{}, columnKey string) []in
 	return columns
 }
 
+/**
+ * 数据转json
+ * @param interface{} data
+ * @return string
+ */
 func JsonEncode(data interface{}) (string, error) {
 	jsons, err := json.Marshal(data)
 	return string(jsons), err
 }
 
+/**
+ * json转数组
+ * @param string data
+ * @return map[string]interface{}
+ */
 func JsonDecode(data string) (map[string]interface{}, error) {
 	var dat map[string]interface{}
 	err := json.Unmarshal([]byte(data), &dat)
 	return dat, err
 }
 
+/**
+ * 判断数组是否存在
+ * @param interface needle
+ * @param interface hystack
+ * @return bool
+ */
 func InArray(needle interface{}, hystack interface{}) bool {
 	switch key := needle.(type) {
 	case string:
@@ -117,7 +172,11 @@ func InArray(needle interface{}, hystack interface{}) bool {
 	return false
 }
 
-//md5加密
+/**
+ * md5加密
+ * @param string src
+ * @return string
+ */
 func Md5(src string) string {
 	m := md5.New()
 	m.Write([]byte(src))
@@ -125,7 +184,11 @@ func Md5(src string) string {
 	return res
 }
 
-// 密码加密算法
+/**
+ * 密码加密算法
+ * @param string password
+ * @return string
+ */
 func PasswordHash(password string) string {
 	return Md5(constant.SYSTEM_SECRET_KEY + password + constant.SYSTEM_SECRET_KEY)
 }

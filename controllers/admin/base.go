@@ -13,6 +13,7 @@ import (
 
 const USER_AUTH_KEY = 1
 
+// 后台管理系统基类
 type BaseController struct {
 	beego.Controller
 	Userlog 	model.Userlog
@@ -43,6 +44,10 @@ func (c *BaseController) Prepare() {
 	c._getConfig(false)
 }
 
+/**
+ * 数据分页接口
+ * @return string
+ */
 func (c *BaseController) list(totalRow int)  {
 	model := org.Page{Request: c.Ctx.Request}
 	model.NewPage().SetParams(totalRow, c.pageRow)
@@ -54,6 +59,10 @@ func (c *BaseController) list(totalRow int)  {
 	c.Data["pages"] = str
 }
 
+/**
+ * ajax错误返回通用接口
+ * @return json
+ */
 func (c *BaseController) ajaxError(msg string, data interface{}, url string) {
 	response := make(map[string]interface{})
 	response["info"] = msg
@@ -65,6 +74,10 @@ func (c *BaseController) ajaxError(msg string, data interface{}, url string) {
 	c.StopRun()
 }
 
+/**
+ * ajax成功返回通用接口
+ * @return json
+ */
 func (c *BaseController) ajaxSuccess(msg string, data interface{}, url string) {
 	response := make(map[string]interface{})
 	response["info"] = msg

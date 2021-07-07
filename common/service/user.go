@@ -14,6 +14,10 @@ type User struct {
 	Userpass    string
 }
 
+/**
+ * 用户登录
+ * @return interface{}，bool
+ */
 func (c *User) DoLogin() (m interface{}, bool bool) {
 	model := new (model.User)
 	model.Username =  c.Username

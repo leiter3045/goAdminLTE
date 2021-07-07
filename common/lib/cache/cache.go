@@ -6,6 +6,9 @@ import (
 	"time"
 )
 
+/**
+ * 缓存接口
+ */
 type Cache interface {
 	SetStr(key string, value interface{}, time time.Duration) error
 	GetStr(key string) (string, error)
@@ -16,6 +19,11 @@ type Instance func() Cache
 
 var adapters = make(map[string]Instance)
 
+/**
+ * 注册缓存实列
+ * @param string name
+ * @param Instance adapter
+ */
 func Register(name string, adapter Instance) {
 	if adapter == nil {
 		panic("cache: Register adapter is nil")
@@ -26,6 +34,10 @@ func Register(name string, adapter Instance) {
 	adapters[name] = adapter
 }
 
+/**
+ * 缓存工厂接口
+ * @return adapter， error
+ */
 func GetInstance( ) (adapter Cache, err error) {
 	var adapterName string
 	adapterName = beego.AppConfig.String("cachename")

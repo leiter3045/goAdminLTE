@@ -11,6 +11,10 @@ type User struct {
 	Userpass   		string
 }
 
+/**
+ * 验证数据
+ * @return bool
+ */
 func (u *User) Valid() (bool) {
 	if username := u.Username; len(username) == 0 {
 		u.SetError("name不得为空")

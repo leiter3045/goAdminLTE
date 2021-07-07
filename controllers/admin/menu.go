@@ -7,11 +7,15 @@ import (
 	"strconv"
 )
 
+// 菜单管理
 type MenuController struct {
 	BaseController
 	model.Menu
 }
 
+/**
+ * 页面
+ */
 func (c *MenuController) Index() {
 	menus, _ := c.GetMenuByAll(9)
 	m := org.ToHtmlTree(menus, 0, 0)
@@ -19,11 +23,17 @@ func (c *MenuController) Index() {
 	c.TplName = "menu/index.html"
 }
 
+/**
+ * 获取所有菜单
+ */
 func (c *MenuController) GetAll() {
 	info, _ := c.GetMenuByAll(1)
 	c.ajaxSuccess("获取数据成功", info, "")
 }
 
+/**
+ * 添加菜单页面
+ */
 func (c *MenuController) Add() {
 	menus, _ := c.GetMenuByAll(1)
 	m := org.ToHtmlTree(menus, 0, 0)
@@ -31,6 +41,9 @@ func (c *MenuController) Add() {
 	c.TplName = "menu/add.html"
 }
 
+/**
+ * 编辑菜单页面
+ */
 func (c *MenuController) Edit() {
 	id , _ := c.GetInt("id", 0)
 	info, _ := c.GetInfoById(id)
@@ -41,6 +54,9 @@ func (c *MenuController) Edit() {
 	c.TplName = "menu/add.html"
 }
 
+/**
+ * 编辑菜单
+ */
 func (c *MenuController) EditPost() {
 	id , err := c.GetInt("id", 0)
 	if err != nil {
@@ -67,6 +83,9 @@ func (c *MenuController) EditPost() {
 	c.ajaxSuccess("编辑数据成功！", arr, "-1")
 }
 
+/**
+ * 添加菜单
+ */
 func (c *MenuController) AddPost() {
 	sort , _ := c.GetInt("sort", 50)
 	pid , _ := c.GetInt("pid", 0)
@@ -89,6 +108,9 @@ func (c *MenuController) AddPost() {
 	c.ajaxSuccess("新增数据成功！", arr, "-1")
 }
 
+/**
+ * 删除菜单
+ */
 func (c *MenuController) Del()  {
 	if c.loginuser["Id"] != USER_AUTH_KEY {
 		c.ajaxError("菜单只有超级管理才可删除", "", "")

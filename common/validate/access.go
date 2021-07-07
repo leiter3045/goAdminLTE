@@ -11,6 +11,10 @@ type Access struct {
 	Url   		string
 }
 
+/**
+ * 验证数据
+ * @return bool
+ */
 func (u *Access) Valid() (bool) {
 	if roleId := u.RoleId; roleId == 0 {
 		u.SetError("角色ID不得为空")

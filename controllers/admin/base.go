@@ -249,11 +249,6 @@ func (c *BaseController) filterMenu(menus []org.Tree, url string) ([]org.Tree) {
 /**
  * 获取系统配置信息
  */
-/**
- * 根据权限过滤菜单
- * @param unknown $menus
- * @return multitype:unknown
- */
 func (c *BaseController) _getConfig(refresh bool) {
 	// 先格式化TREE
 	service := service.Config{}
